@@ -31,15 +31,15 @@ public class CryptoFile {
         try {
             fileInputStream = new FileInputStream(file);
             // TODO...
-            Cipher setCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            CipherInputStream cipherForInputStream = new CipherInputStream(fileInputStream, setCipher);
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            CipherInputStream cripherInputStream = new CipherInputStream(fileInputStream, cipher);
             SecretKey secretKey = new SecretKeySpec(password.getBytes(), "DES");
-            setCipher.init(Cipher.DECRYPT_MODE, secretKey);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
             
-            DataInputStream dataInputStream = new DataInputStream(cipherForInputStream);
+            DataInputStream dataInputStream = new DataInputStream(cripherInputStream);
             String stringFromFile = dataInputStream.readUTF();
             dataInputStream.close();
-            setCipher.doFinal();
+            cipher.doFinal();
             
             return stringFromFile;        
         } catch (FileNotFoundException ex) {
@@ -71,15 +71,15 @@ public class CryptoFile {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(file);
-            Cipher setCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            CipherOutputStream cipherForOutputStream = new CipherOutputStream(fileOutputStream, setCipher);
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            CipherOutputStream cipherOutputStream = new CipherOutputStream(fileOutputStream, cipher);
             SecretKey secretKey = new SecretKeySpec(password.getBytes(), "DES");
-            setCipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             
-            DataOutputStream dataOutputStream = new DataOutputStream(cipherForOutputStream);
+            DataOutputStream dataOutputStream = new DataOutputStream(cipherOutputStream);
             dataOutputStream.writeUTF(textForWrite);
             dataOutputStream.close();
-            setCipher.doFinal();
+            cipher.doFinal();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchAlgorithmException ex) {
