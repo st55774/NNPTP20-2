@@ -32,11 +32,11 @@ public class CryptoFile {
             fileInputStream = new FileInputStream(file);
             // TODO...
             Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            CipherInputStream cripherInputStream = new CipherInputStream(fileInputStream, cipher);
+            CipherInputStream decipherInputStream = new CipherInputStream(fileInputStream, cipher);
             SecretKey secretKey = new SecretKeySpec(password.getBytes(), "DES");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             
-            DataInputStream dataInputStream = new DataInputStream(cripherInputStream);
+            DataInputStream dataInputStream = new DataInputStream(decipherInputStream);
             String stringFromFile = dataInputStream.readUTF();
             dataInputStream.close();
             cipher.doFinal();
