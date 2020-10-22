@@ -18,20 +18,12 @@ public class PasswordDatabase {
     
     private List<Password> passwords;
 
-    public PasswordDatabase(File file, String passwd) {
-        this.file = file;
+    public PasswordDatabase(String file, String passwd, List<Password> passwords) {
+        this.file = new File(file);
         this.passwd = passwd;
+        this.passwords = passwords;
     }
-    
-    public void load() {
-        // TODO: use JSON and CryptoFile to load
-        // TODO: throw exceptions when error
-    }
-    
-    public void save() {
-        // TODO: use JSON and CryptoFile t save
-    }
-    
+
     public void add(Password password) {
         passwords.add(password);
     }
@@ -49,5 +41,16 @@ public class PasswordDatabase {
         }
         return null;
     }
-    
+
+    public File getFile() {
+        return file;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public List<Password> getPasswords() {
+        return passwords;
+    }
 }

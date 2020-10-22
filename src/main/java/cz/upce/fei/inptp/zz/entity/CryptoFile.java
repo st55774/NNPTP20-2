@@ -108,5 +108,8 @@ public class CryptoFile {
             }
         }
     }
-    
+
+    public static void writeFile(PasswordDatabase passwordDatabase) {
+        writeFile(passwordDatabase.getFile(), passwordDatabase.getPasswd(), new JSON().toJson(passwordDatabase.getPasswords()));
+    }
 }
