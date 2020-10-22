@@ -6,9 +6,9 @@
 package cz.upce.fei.inptp.zz.entity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 /**
  *
@@ -18,7 +18,7 @@ public class PasswordDatabase {
     private File file;
     private String passwd;
     
-    private List<Password> passwords;
+    private List<Password> passwords = new ArrayList<>();
 
     public PasswordDatabase(File file, String passwd) {
         this.file = file;
