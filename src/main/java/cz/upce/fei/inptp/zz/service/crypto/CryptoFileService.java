@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.upce.fei.inptp.zz.entity;
+package cz.upce.fei.inptp.zz.service.crypto;
 
-import java.io.DataInput;
+import cz.upce.fei.inptp.zz.entity.PasswordDatabase;
+import cz.upce.fei.inptp.zz.service.json.JSONService;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -25,14 +27,25 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.inject.Inject;
 
 /**
+ * Service for creating encrypted files.
  *
- * @author Roman
+ * @author Ondřej Chrbolka
+ *
  */
-public class CryptoFile {
-    
-    public static String readFile(File file, String password) {
+public class CryptoFileService implements CryptoService {
+
+    private JSONService jsonService;
+
+    @Inject
+    public CryptoFileService(JSONService jsonService) {
+        this.jsonService = jsonService;
+    }
+
+    @Override
+    public String readFile(File file, String password) {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);
@@ -49,31 +62,32 @@ public class CryptoFile {
             
             return r;        
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchPaddingException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeyException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalBlockSizeException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BadPaddingException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 fis.close();
             } catch (IOException ex) {
-                Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         return null;
     }
     
-    public static void  writeFile(File file, String password, String cnt) {
+    @Override
+    public void writeFile(File file, String password, String cnt) {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file);
@@ -87,29 +101,30 @@ public class CryptoFile {
             dos.close();
             c.doFinal();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchPaddingException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeyException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalBlockSizeException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BadPaddingException ex) {
-            Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 fos.close();
             } catch (IOException ex) {
-                Logger.getLogger(CryptoFile.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public static void writeFile(PasswordDatabase passwordDatabase) {
-        writeFile(passwordDatabase.getFile(), passwordDatabase.getPasswd(), new JSON().toJson(passwordDatabase.getPasswords()));
+    @Override
+    public void writeFile(PasswordDatabase passwordDatabase) {
+        writeFile(passwordDatabase.getFile(), passwordDatabase.getPasswd(), jsonService.toJson(passwordDatabase.getPasswords()));
     }
 }
