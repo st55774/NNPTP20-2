@@ -3,7 +3,6 @@ package cz.upce.fei.inptp.zz.entity;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -18,7 +17,7 @@ public class PasswordDatabaseTest {
 
     @Before
     public void setUp() {
-        database = new PasswordDatabase(new File("/tmp/test"), "password0");
+        database = new PasswordDatabase(null, "password0");
     }
 
     @Test
