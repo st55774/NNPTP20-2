@@ -16,6 +16,7 @@ public class JSON {
     
     public String toJson(List<Password> passwords)  {
         // TODO: support all parameters!!!
+        // TODO: support for categories - save them at once/save absolute path as array and later reconstruct?
         String output = "[";
         for (Password password : passwords) {
             if (!output.isEmpty() && !output.equals("["))
