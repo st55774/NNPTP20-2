@@ -9,32 +9,31 @@ import cz.upce.fei.inptp.zz.service.password.PasswordDatabaseServiceModule;
 /**
  * It provides the dependency injector for project.
  *
- * @author Ondřej Chrbolka
- *
  * */
 public final class InstanceInjector {
-    /**
-     * To save dependency single instance
-     * */
-    private static Injector injector;
 
     private InstanceInjector(){
+    }
+
+    /**
+     * Holder for Instance injector to prevent lazy.
+     *
+     * */
+    private static class InjectorHolder{
+        public static final Injector INSTANCE_INJECTOR = Guice.createInjector(
+                new PasswordDatabaseServiceModule(),
+                new JSONFileServiceModule(),
+                new CryptoFileServiceModule()
+        );
     }
 
     /**
      * It will return the single instance of dependency injector.
      *
      * @return dependency injector.
+     *
      * */
     public static Injector injector(){
-        if(injector == null){
-            injector = Guice.createInjector(
-                    new PasswordDatabaseServiceModule(),
-                    new JSONFileServiceModule(),
-                    new CryptoFileServiceModule()
-            );
-        }
-
-        return injector;
+        return InjectorHolder.INSTANCE_INJECTOR;
     }
 }

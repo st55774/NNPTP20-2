@@ -7,8 +7,6 @@ import java.io.File;
 /**
  * Service for creating encrypted files.
  *
- * @author Ondřej Chrbolka
- *
  */
 public interface CryptoService {
     /**

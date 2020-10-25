@@ -7,8 +7,6 @@ import java.util.List;
 /**
  * Service for creating and reading JSON files.
  *
- * @author Ondřej Chrbolka
- *
  * */
 public interface JSONService {
     /**
@@ -17,6 +15,7 @@ public interface JSONService {
      * @param passwords Passwords which will be convert to JSON.
      *
      * @return JSON formatted passwords.
+     *
      * */
     String toJson(List<Password> passwords);
 

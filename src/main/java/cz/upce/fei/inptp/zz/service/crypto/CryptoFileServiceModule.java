@@ -6,8 +6,6 @@ import com.google.inject.Singleton;
 /**
  * Dependency injector module for {@link CryptoFileService} and {@link CryptoFileService}.
  *
- * @author Ondřej Chrbolka
- *
  * */
 public class CryptoFileServiceModule extends AbstractModule {
     @Override

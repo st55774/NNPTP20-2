@@ -6,8 +6,6 @@ import com.google.inject.Singleton;
 /**
  * Dependency injector module for {@link PasswordDatabaseService} nad {@link JSONPasswordDatabaseService}
  *
- * @author Ondřej Chrbolka
- *
  * */
 public class PasswordDatabaseServiceModule extends AbstractModule {
     @Override

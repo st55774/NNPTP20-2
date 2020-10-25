@@ -32,8 +32,6 @@ import javax.inject.Inject;
 /**
  * Service for creating encrypted files.
  *
- * @author Ondřej Chrbolka
- *
  */
 public class CryptoFileService implements CryptoService {
 

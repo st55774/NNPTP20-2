@@ -18,8 +18,8 @@ public class PasswordDatabase {
     
     private List<Password> passwords;
 
-    public PasswordDatabase(String file, String passwd, List<Password> passwords) {
-        this.file = new File(file);
+    public PasswordDatabase(File file, String passwd, List<Password> passwords) {
+        this.file = file;
         this.passwd = passwd;
         this.passwords = passwords;
     }
