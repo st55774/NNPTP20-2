@@ -15,8 +15,8 @@ public class Password {
 
     private int id;
     private String password;
-    //private HashMap<ParameterTye, Parameter> parameters;
     private HashMap<String, Parameter> parameters;
+    private Category category;
 
     public Password() {
     }
@@ -51,6 +51,15 @@ public class Password {
     public Parameter getParameter(String t) {
         return parameters.get(t);
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    
     
     
 
