@@ -6,7 +6,9 @@
 package cz.upce.fei.inptp.zz.entity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -16,7 +18,7 @@ public class PasswordDatabase {
     private File file;
     private String passwd;
     
-    private List<Password> passwords;
+    private List<Password> passwords = new ArrayList<>();
 
     public PasswordDatabase(File file, String passwd) {
         this.file = file;
@@ -37,17 +39,14 @@ public class PasswordDatabase {
     }
     
     public Password findEntryByTitle(String title) {
-        for (Password password : passwords) {
-            
-            if (password.hasParameter(Parameter.StandardizedParameters.TITLE)) {
-                Parameter.TextParameter titleParam;
-                titleParam = (Parameter.TextParameter)password.getParameter(Parameter.StandardizedParameters.TITLE);
-                if (titleParam.getValue().equals(titleParam)) {
-                    return password;
-                }
-            }
-        }
-        return null;
+        return passwords
+                .stream()
+                .filter(password ->
+                        password.hasParameter(Parameter.StandardizedParameters.TITLE)
+                                && Objects.equals(((Parameter.TextParameter) password.getParameter(Parameter.StandardizedParameters.TITLE)).getValue(), title)
+                )
+                .findFirst()
+                .orElse(null);
     }
     
 }
