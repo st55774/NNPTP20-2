@@ -1,5 +1,6 @@
 package cz.upce.fei.inptp.zz.service.crypto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import cz.upce.fei.inptp.zz.entity.PasswordDatabase;
 import cz.upce.fei.inptp.zz.service.json.JSONService;
 
@@ -169,7 +170,7 @@ public class CryptoFileService implements CryptoService {
     }
 
     @Override
-    public void writeFile(PasswordDatabase passwordDatabase) {
+    public void writeFile(PasswordDatabase passwordDatabase) throws JsonProcessingException {
         writeFile(passwordDatabase.getFile(), passwordDatabase.getPasswd(), jsonService.toJson(passwordDatabase.getPasswords()));
     }
 }
