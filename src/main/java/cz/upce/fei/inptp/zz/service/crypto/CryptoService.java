@@ -1,7 +1,7 @@
 package cz.upce.fei.inptp.zz.service.crypto;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import cz.upce.fei.inptp.zz.entity.PasswordDatabase;
+import cz.upce.fei.inptp.zz.exception.JsonConversionException;
 
 import java.io.File;
 
@@ -53,5 +53,5 @@ public interface CryptoService {
      *
      * @param passwordDatabase passwords database which will be saved to encrypted file.
      * */
-    void writeFile(PasswordDatabase passwordDatabase) throws JsonProcessingException;
+    void writeFile(PasswordDatabase passwordDatabase) throws JsonConversionException;
 }

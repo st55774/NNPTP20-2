@@ -1,9 +1,9 @@
 package cz.upce.fei.inptp.zz.service.password;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Inject;
 import cz.upce.fei.inptp.zz.entity.Password;
 import cz.upce.fei.inptp.zz.entity.PasswordDatabase;
+import cz.upce.fei.inptp.zz.exception.JsonConversionException;
 import cz.upce.fei.inptp.zz.service.crypto.CryptoService;
 import cz.upce.fei.inptp.zz.service.json.JSONService;
 
@@ -37,7 +37,7 @@ public class JSONPasswordDatabaseService implements PasswordDatabaseService {
         List<Password> passwordFromJSON = null;
         try {
             passwordFromJSON = jsonService.fromJson(content);
-        } catch (JsonProcessingException e) {
+        } catch (JsonConversionException e) {
             logger.log(Level.SEVERE, "Error during converting JSON to Password list!", e);
         }
         return new PasswordDatabase(path, password, passwordFromJSON);
@@ -47,7 +47,7 @@ public class JSONPasswordDatabaseService implements PasswordDatabaseService {
     public void savePasswordDatabase(PasswordDatabase passwordDatabase) {
         try {
             cryptoService.writeFile(passwordDatabase);
-        } catch (JsonProcessingException e) {
+        } catch (JsonConversionException e) {
             logger.log(Level.SEVERE, "Error during converting Passwords list to JSON format. File with passwords is not saved!", e);
         }
     }
