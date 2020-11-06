@@ -171,6 +171,6 @@ public class CryptoFileService implements CryptoService {
 
     @Override
     public void writeFile(PasswordDatabase passwordDatabase) throws JsonConversionException {
-        writeFile(passwordDatabase.getFile(), passwordDatabase.getPasswd(), jsonService.toJson(passwordDatabase.getPasswords()));
-    }
+        writeFile(passwordDatabase.getFile(), passwordDatabase.getPassword(), jsonService.toJson(passwordDatabase.getPasswords()));
+        }
 }
