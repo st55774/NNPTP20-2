@@ -1,6 +1,7 @@
 package cz.upce.fei.inptp.zz.service.crypto;
 
 import cz.upce.fei.inptp.zz.entity.PasswordDatabase;
+import cz.upce.fei.inptp.zz.exception.JsonConversionException;
 import cz.upce.fei.inptp.zz.service.json.JSONService;
 
 import java.io.DataInputStream;
@@ -169,7 +170,7 @@ public class CryptoFileService implements CryptoService {
     }
 
     @Override
-    public void writeFile(PasswordDatabase passwordDatabase) {
+    public void writeFile(PasswordDatabase passwordDatabase) throws JsonConversionException {
         writeFile(passwordDatabase.getFile(), passwordDatabase.getPasswd(), jsonService.toJson(passwordDatabase.getPasswords()));
     }
 }
