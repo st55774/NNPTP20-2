@@ -4,12 +4,7 @@ import cz.upce.fei.inptp.zz.entity.PasswordDatabase;
 import cz.upce.fei.inptp.zz.exception.JsonConversionException;
 import cz.upce.fei.inptp.zz.service.json.JSONService;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -55,44 +50,25 @@ public class CryptoFileService implements CryptoService {
 
     @Override
     public String readFile(File file, String password) {
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(file);
+        try (InputStream fileInputStream = new FileInputStream(file)) {
             DataInputStream dataInputStream = new DataInputStream(fileInputStream);
             String stringFromFile = dataInputStream.readUTF();
             dataInputStream.close();
-            
             return decrypt(password, stringFromFile);
         } catch (IOException ex) {
             Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fileInputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            return null;
         }
-        
-        return null;
     }
-    
+
     @Override
     public void writeFile(File file, String password, String textForWrite) {
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(file);
+        try (OutputStream fileOutputStream = new FileOutputStream(file)) {
             DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream);
             dataOutputStream.writeUTF(encrypt(password, textForWrite));
             dataOutputStream.close();
         } catch (IOException ex) {
             Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                fileOutputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(CryptoFileService.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 
