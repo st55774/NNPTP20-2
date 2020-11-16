@@ -31,7 +31,7 @@ public class main {
         databaseService.savePasswordDatabase(new PasswordDatabase(new File("test.txt"), "password", pwds));
 
         try {
-            String read = databaseService.openPasswordDatabase(new File("test.txt"), "password").getPasswd();
+            String read = databaseService.openPasswordDatabase(new File("test.txt"), "password").getPassword();
             System.out.println(read);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
