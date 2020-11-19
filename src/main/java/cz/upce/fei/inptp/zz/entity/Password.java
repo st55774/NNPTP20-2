@@ -71,8 +71,8 @@ public class Password {
         }
         final Password other = (Password) obj;
         return id == other.id
-                && password.equals(other.password)
-                && category.equals(other.category);
+                && Objects.equals(password, other.password)
+                && Objects.equals(category, other.category);
     }
     
     @Override
