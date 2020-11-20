@@ -74,7 +74,7 @@ public class Password {
                 && Objects.equals(password, other.password)
                 && Objects.equals(category, other.category);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(id, password, category);
