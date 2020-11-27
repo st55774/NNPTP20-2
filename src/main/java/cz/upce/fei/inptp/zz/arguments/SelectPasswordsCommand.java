@@ -6,6 +6,9 @@ import com.beust.jcommander.Parameters;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Command arguments for selecting passwords from database.
+ * */
 @Parameters(commandDescription = "Find passwords by optional parameters.")
 public class SelectPasswordsCommand extends CommandArguments {
     @DynamicParameter(names = "-F", description = "Find by attribute name and value.")
