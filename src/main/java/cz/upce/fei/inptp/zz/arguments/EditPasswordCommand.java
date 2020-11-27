@@ -8,14 +8,17 @@ import cz.upce.fei.inptp.zz.converter.TextParameterConverter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command arguments for editing password from database.
+ * */
 @Parameters(commandDescription = "Edit password in database.")
 public class EditPasswordCommand extends CommandArguments {
-    @Parameter(names = {"--id" ,"-i"}, required = true, description = "ID of password record.")
-    private Integer id;
-
     @Parameter(required = true, converter = PasswordParameterConverter.class,
             description = "Edit password value in database.")
     private cz.upce.fei.inptp.zz.entity.Parameter.PasswordParameter newValue;
+
+    @Parameter(names = {"--id" ,"-i"}, required = true, description = "ID of password record.")
+    private Integer id;
 
     @Parameter(names = {"--optional-parameter", "--parameter", "-o"}, converter = TextParameterConverter.class, variableArity = true,
             description = "Edit or add (if not exist) text parameters to save with passwords.")

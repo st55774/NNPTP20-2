@@ -7,9 +7,8 @@ import cz.upce.fei.inptp.zz.converter.PasswordParameterConverter;
 import java.io.File;
 
 /**
- * Command arguments for manipulating password files.
+ * Based command arguments for manipulating password files.
  * */
-
 public abstract class CommandArguments {
     @Parameter(names = {"--file", "-f"}, required = true, converter = FileConverter.class,
             description = "Database file with encrypted passwords")
