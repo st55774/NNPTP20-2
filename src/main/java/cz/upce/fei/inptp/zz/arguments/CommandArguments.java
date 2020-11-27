@@ -14,7 +14,7 @@ public abstract class CommandArguments {
             description = "Database file with encrypted passwords")
     protected File passwordFile;
 
-    @Parameter(names = {"--password", "-p"}, required = true, password = true, echoInput = true,
+    @Parameter(names = {"--file-password", "-p"}, required = true, password = true, echoInput = true,
             converter = PasswordParameterConverter.class,
             description = "File password to encrypt the file")
     protected cz.upce.fei.inptp.zz.entity.Parameter.PasswordParameter filePassword;
